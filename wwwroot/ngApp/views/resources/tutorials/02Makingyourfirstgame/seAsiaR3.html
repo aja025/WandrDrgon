@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SE Asia</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript"> 
+
+        var game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'test', {
+            preload: preload,
+            create: create,
+            update: update
+        }, true);
+
+        function preload() {
+
+            game.load.image('ground', 'assets/platform.png');
+            game.load.image('cherryblossom', 'assets/cherryblossom.png');
+            game.load.image('star', 'assets/star2.png');
+            game.load.image('noodlebowl', 'assets/noodlebowl.png');
+            game.load.image('jade', 'assets/jade.png');
+            game.load.image('topaz', 'assets/topaz.png');
+            game.load.image('bloodstone', 'assets/bloodstone.png');
+            game.load.spritesheet('dude', 'assets/maindragonspritesheet.png', 57, 57, 8);   // frame size X,Y and # of frames
+            game.load.bitmapFont('desyrel', 'assets/desyrel.png', 'assets/desyrel.xml');
+            game.load.audio('collect', 'assets/CollectCoin.mp3');
+            game.load.audio('special', 'assets/GemSound.mp3');
+            game.load.audio('music', 'assets/rolemu_-_02_-_The_White_Frame.mp3');
+        }
+
+        var player;
+        var platforms;
+        var cursors;
+
+        var stars;
+        var cherryblossoms;
+        var noodlebowls;
+        var jades;
+        var topazs;
+        var bloodstones;
+
+        var score = 0;
+        var scoreText;
+        var myText;
+
+        var music;
+        var sound;
+
+        function create() {
+            music = game.add.audio('music', .6);
+            music.play();
+
+            //  We're going to be using physics, so enable the Arcade Physics system
+            // game.physics.startSystem(Phaser.Physics.ARCADE);
+            // myText = game.add.bitmapText(60, 100, 'desyrel', "Welcome to Region 3!!", 58);
+            myText = game.add.bitmapText(320, 100, 'desyrel', "GO!!!", 70);
+
+            game.time.events.add(2000, function () {
+                game.add.tween(myText).to({ y: 0 }, 1500, Phaser.Easing.Linear.None, true);
+                game.add.tween(myText).to({ alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
+            }, this);
+
+            // The player and its settings
+            player = game.add.sprite(32, game.world.height - 100, 'dude');
+            player.scale.x = 1.2;
+            player.scale.y = 1.2;            
+            //  We need to enable physics on the player
+            game.physics.arcade.enable(player);
+
+            //  Player physics properties. Give the little guy a slight bounce.
+            player.body.collideWorldBounds = true;
+
+            //  Our two animations, walking left and right.
+            player.animations.add('left', [6, 7], 5, true);      //motion name, frames used, frameRate, loop the animation?
+            player.animations.add('right', [2, 3], 5, true);
+            player.animations.add('up', [0, 1], 5, true);
+            player.animations.add('down', [4, 5], 5, true);
+
+            //  Finally some stars,items to collect
+            stars = game.add.group();
+            cherryblossoms = game.add.group();
+            noodlebowls = game.add.group();
+            jades = game.add.group();
+            topazs = game.add.group();
+            bloodstones = game.add.group();
+
+
+            //  We will enable physics for any star that is created in this group
+            stars.enableBody = true;
+            cherryblossoms.enableBody = true;
+            noodlebowls.enableBody = true;
+            jades.enableBody = true;
+            topazs.enableBody = true;
+            bloodstones.enableBody = true;
+
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (4 + Math.random() * 10), 4, createCherryBlossoms, this);
+            function createCherryBlossoms() {
+                var cherryblossom = cherryblossoms.create(game.world.randomX, game.world.randomY, 'cherryblossom')
+
+            }
+            // game.time.events.repeat(Phaser.Timer.SECOND * (4 + (Math.random()*7)), 1, createCherryBlossoms, this);   // 3 is second delay and 1 is how many times to repeat
+            //     function createCherryBlossoms() {
+            //         for (var i = 0; i < 3; i++){
+            //      var cherryblossom = i;
+            //      cherryblossom = cherryblossoms.create(game.world.randomX, game.world.randomY, 'cherryblossom');
+            // var rand = game.rnd.realInRange(1.5,1.5);
+            // //  Set the scale of the sprite to the random value
+            // star2.scale.setTo(rand, rand);
+            // }
+        // }
+        game.time.events.repeat(Phaser.Timer.SECOND * (2), 1, createNoodleBowls, this);
+        function createNoodleBowls() {
+            for (var i = 0; i < 3; i++) {
+                var noodlebowl = i;
+                noodlebowl = noodlebowls.create(game.world.randomX, game.world.randomY, 'noodlebowl');
+            }
+        }
+        game.time.events.repeat(Phaser.Timer.SECOND * (3), 1, createJade, this);
+        function createJade() {
+            for (var i = 0; i < 3; i++) {
+                var jade = i;
+                jade = jades.create(game.world.randomX, game.world.randomY, 'jade');
+            }
+        }
+        game.time.events.repeat(Phaser.Timer.SECOND * (4), 1, createTopaz, this);
+        function createTopaz() {
+            for (var i = 0; i < 3; i++) {
+                var topaz = i;
+                topaz = topazs.create(game.world.randomX, game.world.randomY, 'topaz');
+            }
+        }
+        game.time.events.repeat(Phaser.Timer.SECOND * (5), 1, createBloodstone, this);
+        function createBloodstone() {
+            for (var i = 0; i < 3; i++) {
+                var bloodstone = i;
+                bloodstone = bloodstones.create(game.world.randomX, game.world.randomY, 'bloodstone');
+            }
+        }
+        //  Here we'll create 12 of them evenly spaced apart    timer for above (Math.random()*6)
+        for (var i = 0; i < 12; i++) {
+            //  Create a star inside of the 'stars' group
+            var star = stars.create(i * Math.random() * 80, Math.random() * 420, 'star');      //i*70 is the x coordinate...
+            // var rand = game.rnd.realInRange(1.5,1.5);
+            // //  Set the scale of the sprite to the random value
+            // star.scale.setTo(rand, rand);
+        }
+    
+        //  The score
+        scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+
+        //  Our controls.
+        cursors = game.input.keyboard.createCursorKeys();
+    }
+        function update() {
+
+            //  Collide the player and the stars with the platforms
+            var hitPlatform = game.physics.arcade.collide(player, platforms);
+            game.physics.arcade.collide(stars, platforms);
+            game.physics.arcade.collide(cherryblossoms, platforms);
+            game.physics.arcade.collide(noodlebowls, platforms);
+            game.physics.arcade.collide(jades, platforms);
+            game.physics.arcade.collide(topazs, platforms);
+            game.physics.arcade.collide(bloodstones, platforms);
+
+
+            //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+            game.physics.arcade.overlap(player, stars, collectStar, null, this);
+            game.physics.arcade.overlap(player, cherryblossoms, collectCherryBlossom, null, this);
+            game.physics.arcade.overlap(player, noodlebowls, collectNoodleBowl, null, this);
+            game.physics.arcade.overlap(player, jades, collectJade, null, this);
+            game.physics.arcade.overlap(player, topazs, collectTopaz, null, this);
+            game.physics.arcade.overlap(player, bloodstones, collectBloodstone, null, this);
+
+            player.body.velocity.x = 0;
+            player.body.velocity.y = 0;
+
+            if (cursors.left.isDown)   //  Move to the left
+            {
+                player.body.velocity.x = -150;
+                player.animations.play('left');
+            }
+            if (cursors.right.isDown)   //  Move to the right
+            {
+                player.body.velocity.x = 150;
+                player.animations.play('right');
+            }
+            if (cursors.up.isDown) {
+                player.body.velocity.y = -150;
+                player.animations.play('up');
+            }
+            if (cursors.down.isDown) {
+                player.body.velocity.y = 150;
+                player.animations.play('down');
+            }
+        }
+        var cherryBlossomCount = 0;
+        var noodleBowlCount = 0;
+        var jadeCount = 0;
+        var topazCount = 0;
+        var bloodstoneCount = 0;
+
+
+        function collectStar(player, star) {
+            // Removes the star from the screen
+            star.kill();
+            sound = game.add.audio('collect'); 
+            sound.play();
+            //  Add and update the score
+            score += 10;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem("gameScore", score);
+        }
+        function collectCherryBlossom(player, cherryblossom) {
+            cherryblossom.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            score += 20;
+            scoreText.text = 'Score: ' + score;
+            cherryBlossomCount += 1;
+            window.sessionStorage.setItem('cherryBlossomScore', cherryBlossomCount);
+            window.sessionStorage.setItem("gameScore", score);
+        }
+        function collectNoodleBowl(player, noodlebowl) {
+            noodlebowl.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            score += 20;
+            scoreText.text = 'Score: ' + score;
+            noodleBowlCount += 1;
+            window.sessionStorage.setItem('noodleBowlScore', noodleBowlCount);
+            window.sessionStorage.setItem("gameScore", score);
+
+        }
+        function collectJade(player, jade) {
+            jade.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            score += 20;
+            scoreText.text = 'Score: ' + score;
+            jadeCount += 1;
+            window.sessionStorage.setItem('jadeScore', jadeCount);
+            window.sessionStorage.setItem("gameScore", score);
+
+        }
+        function collectTopaz(player, topaz) {
+            topaz.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            score += 20;
+            scoreText.text = 'Score: ' + score;
+            topazCount += 1;
+            window.sessionStorage.setItem('topazScore', topazCount);
+            window.sessionStorage.setItem("gameScore", score);
+
+        }
+        function collectBloodstone(player, bloodstone) {
+            bloodstone.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            score += 20;
+            scoreText.text = 'Score: ' + score;
+            bloodstoneCount += 1;
+            window.sessionStorage.setItem('bloodstoneScore', bloodstoneCount);
+            window.sessionStorage.setItem("gameScore", score);
+        }
+
+                // window.sessionStorage.setItem('tripCounter', 1);    
+    </script>

@@ -1,0 +1,927 @@
+body {
+  background-size: cover;
+  animation-name: mainbg;
+  animation-duration: 400s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  background-color: #cccccc;
+  font-family: 'Raleway', sans-serif;
+  margin-bottom: 150px;
+}
+
+input {
+  font-family: 'Raleway', sans-serif;
+}
+
+a#selectTown {
+  font-family: 'Raleway', sans-serif;
+  width: 123px;
+  /* border: none; */
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin: 1%;
+  color: white;
+  border-radius: 3px;
+  -webkit-transition: background-color .5s;
+  transition: background-color .5s;
+}
+
+a#selectTown:hover {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+body p {
+  font-family: 'Raleway', sans-serif;
+}
+
+body a {
+  color: #FD951D;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+}
+
+#editable {
+  color: #633500;
+  font-family: 'Raleway', sans-serif;
+  text-decoration: none;
+}
+
+@keyframes mainbg {
+  0%   { background-image: url("/images/nightbg.jpg");}
+  15%  { background-image: url("/images/greenbg.jpg");}
+  30%  { background-image: url("/images/morningbg.jpg");}
+  50%  { background-image: url("/images/bluebg.jpg");}
+  65%  { background-image: url("/images/pinkbg.jpg");}
+  100% { background-image: url("/images/nightbg.jpg");}
+}
+
+li{
+    list-style: none;
+    font-family: Courier New, Courier, monospace;
+    color: #000000;
+    font-size: 16px;
+    font-family: 'Inconsolata', monospace;
+}
+
+li b{
+  font-family: 'Inconsolata', monospace;
+}
+
+.chatbox {
+  overflow-y:scroll; 
+  height: 64%; 
+  background-color:rgba(0, 0, 0, 0.65);
+}
+
+.chatbox li {
+  color:white; 
+  border-bottom: 1px dotted #222222;
+  font-size: 13px;
+  padding: 3px;
+}
+
+button #start {
+  background-color: black;
+  font-family: 'Raleway', sans-serif;
+  width: 200px;
+  padding: 8px;
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
+  width: 120px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin: 1%;
+  color: white;
+  border-radius: 3px;
+  -webkit-transition: background-color .5s;
+  transition: background-color .5s;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.flightPath {
+  height: 460px;
+  width: 290px;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  position: relative;
+  z-index: 999;
+  margin-top: -520px;
+  margin-left: 2%;
+  padding: 10px;
+  border-radius: 5px;
+}
+.tunnel{
+  margin-top: -1%;
+  width: 100%;
+}
+/* dynamic map = #map */
+
+label {
+  font-family: 'Raleway', sans-serif;
+}
+
+#map {
+  margin-top: 35px;
+  margin-bottom: 25px;
+  height: 600px; width: 100%;
+  z-index: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  /* padding-bottom: 1%; */
+}
+.UserNav{
+  display: inline-block;
+  margin-top: 3%;
+}
+
+.selectDragon {
+  width: 95%;
+}
+
+.theUser{
+  columns: 1;
+  column-width: 40px;
+  height: 88%;
+  width: 25%;
+  float: left;
+  margin-left: 2%;
+  margin-bottom: 3%;
+  padding: 1.6%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  border-radius: 5px;
+  
+}
+.Dragon{
+  margin-left: 0;
+  width: 350px;
+  float: left;
+  height: auto;
+}
+
+@media screen and (min-width: 480px) {
+  .Dragon{
+    margin-left: 0;
+    width: 300px;
+    float: left;
+    height: auto;
+  }
+}
+
+.dragonStats {
+  color: black;
+  margin-left: 0;
+  float: left;
+}
+
+.theDragon{
+  height: 88%;
+  width: 60%;
+  clear: right;
+  margin-left: 33%;
+  margin-bottom: 3%;
+  padding: 1.6%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  border-radius: 5px;
+}
+
+.User{
+  opacity: .8;
+  margin-top: -3%;
+  width: 89%;
+  font-size: 10px;
+  height: auto;
+}
+
+.travelLog {
+  margin-left: 40%;
+  /* background-color: rgba(255, 255, 255, 0.555);  */
+}
+.travellist{
+  margin-left: 22.3%;
+}
+
+.travelList li{
+  border-bottom: 1px dashed #595959;
+}
+
+.UserPic{
+  width: 60%;
+  max-height: 300px;
+  z-index: 0;
+}
+
+
+div .editButton {
+  margin: 0px;
+  font-size: 11px;
+}
+
+div .editButton a {
+  color: #969696;
+}
+
+div #navigation{
+  background-color: black;
+  padding-top: 2px;
+  padding-right: -10px;
+  width: 100%;
+  height: 6%;
+  z-index: 2;
+}
+
+div #navigation a{
+  font-family: Century Gothic;
+  color: white;
+  text-decoration: none;
+}
+
+span.rightNav {
+  opacity: .5;
+  font-size: 13px;
+  margin-top: -20px;
+  margin-right: 3px;
+  float: right;
+  font-family: 'Saira Semi Condensed', sans-serif;
+  color: #555555;
+  font-weight: lighter;
+  position: relative;
+  z-index: 50;
+}
+
+/* div #navigation h4 p{
+  font-size: 5px;
+  margin-top: 0;
+} */
+
+span.centerNav {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100;
+  font-variant: small-caps;
+  letter-spacing: 15px;
+  color:white;
+  font-size: 100%;
+  /* padding-top: 1%;
+  padding-right: 28%;
+  position: relative; */
+  display: table;
+  margin-top: 1%;
+  margin-right: auto;
+  margin-left: auto;
+  z-index:100;
+  text-shadow: 1px 1px #706C76;
+}
+
+span.leftNav{
+  position: absolute;
+  font-size: 12px;
+  margin-left: 8px;
+  padding-top: 2px;
+  letter-spacing: 5px;
+  text-decoration: none;
+  color: white;
+  padding-right: 33%;
+}
+
+div #bottomNav{
+  font-family: 'Raleway', sans-serif;
+  position: fixed;
+  color: white;
+  font-weight: 100;
+  opacity: .5;
+  height: 25px;
+  background-color: black;
+  bottom: -5px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+  padding-top: 5px;
+  padding-left: 4px;
+  text-align: left;
+  font-size: 10px;
+  letter-spacing: 5px;
+  z-index: 1000;
+}
+
+.socialMedia a {
+  letter-spacing: 5px;
+  font-size: 15px;
+  color: #67DCFF;
+}
+
+.aboutLink a {
+  color: #3CB8FF;
+  padding-top: 6px;
+  font-size: 10px;
+}
+
+div #navigation h3 a{
+  font-size: 14px;
+  margin: 5px;
+}
+
+h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  color: white;
+  text-shadow: 2px 2px #3E3A44;
+  font-size: 70px;
+  font-weight: 100;
+  text-align: center;
+  letter-spacing: 10px;
+  margin-bottom: -20px;
+}
+
+h2{
+  margin-top: -20px;
+  font-family: 'Saira Semi Condensed', sans-serif;
+  font-size: 30px;
+  color: white;
+  letter-spacing: 7px;
+  text-shadow: 2px 2px #3E3A44;
+}
+
+h3{
+  letter-spacing: 3px;
+  font-family: 'Saira Semi Condensed', sans-serif;
+}
+
+strong {
+  font-family: 'Saira Semi Condensed', sans-serif;
+  color: #FF7B00;
+}
+
+h4{
+  letter-spacing: 3px;
+  font-family: 'Saira Semi Condensed', sans-serif;
+}
+
+.tagline {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  text-shadow: 1px 1px 8px #222124;
+}
+
+.tagline i {
+  font-weight: 100;
+  font-family: 'Raleway', sans-serif;
+}
+
+.tagline b {
+  font-family: 'Raleway', sans-serif;
+}
+
+div .paragraph {
+  width: 52%;
+  margin-top: 10px;
+  margin-left: 24%;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 1px 1px 8px #222124;
+  letter-spacing: 1px;
+}
+
+div .user{
+  color: white;
+}
+
+iframe {
+  border-style: none;
+}
+
+#container {
+  position: relative;
+  /* height: 600px;
+  width: 100%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426; */
+  /* text-align:center;     */
+  /*this centers bottom google map only...need to center test/clear game too.. */
+}
+
+#map2, #test {
+  position: absolute;
+}
+
+/* We can now put the map behind the game by giving the game a higher z-index */
+#map2 {
+  z-index: 1;
+  height: 600px;
+  width: 750px;
+  margin-left: 25%;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+}
+/* test is the main game */
+#test {
+  z-index: 2;
+  margin-left: 25%;
+}
+
+.timer, .mg{
+  /* margin: 5px auto; */
+  text-align: center;
+  color: black;
+  /* width: 100px; */
+  margin: 50px;
+  padding: 15px;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: x-large;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  box-shadow: 2px 2px 10px #242426;
+  border-radius: 5px;
+  float: left;
+}
+
+#log{
+  overflow: auto !important;
+  margin-left: -10%;
+}
+
+/* .Random{
+  width: 80%;
+  height: auto;
+  margin: 1%;
+  padding: 1%;
+} */
+
+#frame{
+  text-align:center;
+}
+.card{
+  margin: 0px auto;  
+  height: 600px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  border-style: none;
+  box-shadow: 2px 2px 10px #242426;  
+  border-color: white;
+  border-width: 2px;
+  border-radius: 5px;
+}
+.GameTitle{
+  text-align:center;
+  margin-top: 5px;
+}
+
+footer a{
+  display: block;
+  background-color: black;
+  height: 18px;
+  width: 100%;
+  color: white;
+  font-size: 15px;
+  font-family: Century Gothic;
+  font-weight: lighter;
+  text-align: right;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.itemlog{
+  height:230px;
+  width:220px;
+  border:1px solid #A5A5A5;
+  overflow-y: scroll;
+}
+
+.pItemLog{
+  float: right;
+}
+
+div #secretNav{
+  font-size: 11px;
+  background: black;
+  text-align: center;
+  margin-top: -2px;
+  position: relative;
+  padding: .5%;
+  opacity: 0.9;
+  color: white !important;
+  z-index: 1;
+}
+
+div #secretNav a{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  -webkit-transition: color 1s;
+  transition: color 1s;
+}
+
+div #secretNav a:hover {
+  color: #5EEFFF;
+}
+
+#xp{
+  height: 50%;
+  width: 25%;
+  float: left;
+  clear: right;
+  margin-top: 2%;
+  margin-left: 3%;
+  padding: 1%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  overflow-y: hidden;
+  border-radius: 5px;
+}
+
+div #footer h3{
+  text-align: right;
+  margin-bottom: 3%;
+  font-family: Century Gothic;
+  color: #555555;
+  font-weight: lighter;
+}
+
+#km{
+  height: 50%;
+  width: 25%;
+  float: right;
+  margin-top: 2%;
+  margin-right: 4%;
+  margin-bottom: 2%;
+  padding: 1%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  overflow-y: hidden;
+  border-radius: 5px;
+}
+#trips{
+  height: 50%;
+  width: 25%;
+  margin-left: 36%;
+  margin-top: 2%;
+  padding: 1%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  overflow-y: hidden;
+  align-content: center;
+  border-radius: 5px;
+}
+
+#wanderdragon{
+  color: white;
+  padding: 0;
+  width: 10%;
+  text-align: center;
+}
+
+#loginCard {
+  width: 30%;
+  height: 65%;
+  margin: auto;
+  padding-top: .5%;
+  padding-left: 2%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  border-radius: 5px;
+}
+
+#loginCard a {
+  font-size: 13px;
+  color: #4B4B4B;
+  display: block;
+  margin-left: 29%;
+  margin-top: 1.5%;
+}
+
+#loginCard a:hover {
+  color: #008EC2;
+}
+
+#loginCard input {
+  margin-left: 14%;
+  padding: 1%;
+  width: 66.6%;
+  height: 8%;
+  margin-top: 3%;
+  letter-spacing: 2px;
+  border-style: solid;
+  border-color: #656565;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+#addDragonCard {
+  font-family: 'Raleway', sans-serif;
+  width: 70%;
+  height: auto;
+  margin: auto;
+  padding: .5% 2% 5%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  border-radius: 5px;
+}
+
+#addDragonCard div {
+  font-family: 'Raleway', sans-serif;
+}
+
+#addDragonCard input {
+  padding: 1%;
+  letter-spacing: 2px;
+  border-style: solid;
+  border-color: #656565;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+#latitude {
+  width: 100px;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#longitude {
+  width: 100px;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#search {
+  margin-left: 3%;
+}
+
+#search input {
+  width: 53.8%;
+  height: 5%;
+  margin-left: 21.5%;
+  margin-bottom: 2%;
+  padding: 5px;
+  letter-spacing: 3px;
+  border-style: solid;
+  border-color: #656565;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+#registry {
+  height: auto;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 1%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  border-radius: 5px;
+}
+
+#gamePlay {
+  height: auto;
+  width: 50%;
+  font-family: 'Raleway', sans-serif;
+  margin: auto;
+  margin-bottom: 3%;
+  padding: 3%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  border-radius: 5px;
+}
+
+#gamePlay img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+#randomEvent {
+  height: auto;
+  width: 50%;
+  font-family: 'Raleway', sans-serif;
+  margin: auto;
+  margin-bottom: 3%;
+  padding: 3%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  border-radius: 5px;
+}
+
+#randomEvent div {
+  font-family: 'Raleway', sans-serif;
+}
+
+#randomEvent div img #Random {
+  width: 50%;
+}
+
+div #aboutUs {
+  font-size: 13px;
+  height: 675px;
+  width: 14%;
+  margin-left: 1%;
+  margin-bottom: 50px;
+  padding: 2%;
+  background-color: rgba(237, 237, 237, 0.82);
+  border-style: none;
+  border-color: white;
+  border-width: 2px;
+  box-shadow: 2px 2px 10px #242426;
+  color: black;
+  display: inline-table;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+div #member {
+  width: 100%;
+  height: 100%;
+}
+
+div #aboutUs img {
+  margin: 1.2%;
+  width: 100%;
+  height: auto;
+}
+
+div #aboutUs h2 {
+  margin-bottom: -5px;
+  letter-spacing: 2px;
+}
+
+div #aboutUs h3 {
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.logo {
+  width: 10%;
+  height: auto;
+  opacity: .6;
+}
+
+label.dragonBtn > input{
+  visibility: hidden;
+  position: absolute;
+}
+
+label.dragonBtn > input + img{
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+label.dragonBtn > input + img:hover{
+  box-shadow: 2px 2px 10px #242426;
+  background-color: rgba(237, 237, 237, 0.82);
+  opacity: .7;
+  border-radius: 5px;
+}
+
+label.dragonBtn > input:checked + img{
+  box-shadow: 2px 2px 10px #242426;
+  border-radius: 5px;
+  background-color: rgba(237, 237, 237, 0.82);
+}
+
+.fb {
+  box-sizing: border-box;
+  position: relative;
+  width: 60%;  
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+}
+.fb:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.fb:focus {
+  outline: none;
+}
+.fb:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+
+
+/* Facebook */
+.logofb {
+  background-image: linear-gradient(rgba(20, 22, 27, 0.637), rgba(31, 33, 41, 0.637)); 
+  font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+   text-shadow: 0 -1px 0 rgb(52, 55, 63);
+   text-align: center;
+}
+.logofb:before {
+  border-right: #141927 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+  
+}
+.logofb:hover,
+.logofb:focus {
+  background-color: #5B7BD5;
+  background-image: linear-gradient(#5B7BD5, #4864B1);
+  
+}
+
+th {
+  font-family: 'Raleway', sans-serif;
+  border-bottom: 1px solid #A5A5A5;
+  padding-bottom: 10px;
+}
+
+
+td {
+  width: 10%;
+  height: auto;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #A5A5A5;
+}
+
+tbody {
+  padding-left: 2%;
+}
+
+thead {
+  border-bottom: 1px solid #A5A5A5;
+  text-align: left;
+}
+
+.TablePic{
+  width: 100%;
+  max-width: 30px;
+  max-height: 30px;
+}

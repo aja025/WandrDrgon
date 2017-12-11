@@ -1,0 +1,23 @@
+<h1>Register</h1>
+<br>
+<br>
+<div id="loginCard"> 
+    <h3>Registration Successful!</h3>
+    <!-- <center><img src="/images/dragonmascot.png" width="250px" align="center"></center> -->
+<p>
+    Welcome, make sure you keep your E-mail and password in a safe place!
+</p>
+
+<form ng-submit="controller.addProfile()">
+<p>Now... what shall we call you? You can change this on your dashboard whenever you'd like.</p>
+<input type="text" ng-model="controller.profile.displayName" placeholder="Name" maxlength="20"></input>
+<br>
+<input type="submit" value="Next"></input>
+<!-- //grey out until all fields complete -->
+</form>
+</div>
+
+<!-- <input ng-submit="controller.cancel()" type="submit" value="Cancel"></input> -->
+
+<!-- <form ng-submit="controller.addAd()">       ************** gooder reads had this on the form
+    

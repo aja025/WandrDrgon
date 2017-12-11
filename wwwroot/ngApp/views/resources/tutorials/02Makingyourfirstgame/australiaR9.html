@@ -1,0 +1,324 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+    <title>Australia</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+    var game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'test', {
+        preload: preload,
+        create: create,
+        update: update
+    }, true);
+
+    function preload() {
+
+            // game.load.image('sky', 'assets/phx.png');
+            game.load.image('ground', 'assets/platform.png');
+            game.load.image('star', 'assets/star2.png');
+            game.load.image('boomarang', 'assets/boomarang.png');
+            game.load.image('koala', 'assets/koaladoll.png');
+            game.load.image('opal', 'assets/opal.png');
+            game.load.image('sapphire', 'assets/sapphire.png');
+            game.load.image('amethyst', 'assets/amethyst.png');
+            game.load.bitmapFont('desyrel', 'assets/desyrel.png', 'assets/desyrel.xml');
+            game.load.spritesheet('dude', 'assets/maindragonspritesheet.png', 57, 57, 8);   // frame size X,Y and # of frames
+            game.load.audio('collect', 'assets/CollectCoin.mp3');
+            game.load.audio('special', 'assets/GemSound.mp3');
+            game.load.audio('music', 'assets/Visager_-_14_-_Final_Sacrifice.mp3');
+
+        }
+
+        var player;
+        var platforms;
+        var cursors;
+
+        var stars;
+        var score = 0;
+        var scoreText;
+
+        var boomarangs;
+        var score = 0;
+        var scoreText;
+
+        var koalas ;
+        var score = 0;
+        var scoreText;
+
+        var opals;
+        var score = 0;
+        var scoreText;
+
+        var sapphires;
+        var score = 0;
+        var scoreText;
+
+        var amethysts;
+        var score = 0;
+        var scoreText;
+
+        var music;
+        var sound;
+
+        function create() {
+            music = game.add.audio('music', .6);
+            music.play();
+            // myText = game.add.bitmapText(60, 100, 'desyrel', "Welcome to Region 9!!", 58);
+            myText = game.add.bitmapText(320, 100, 'desyrel', "GO!!!", 70);
+
+            game.time.events.add(2000, function () {
+                game.add.tween(myText).to({ y: 0 }, 1500, Phaser.Easing.Linear.None, true);
+                game.add.tween(myText).to({ alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
+            }, this);
+            
+            //  The platforms group contains the ground and the 2 ledges we can jump on
+            platforms = game.add.group();
+
+            //  We will enable physics for any object that is created in this group
+            platforms.enableBody = true;
+
+
+            // The player and its settings
+            player = game.add.sprite(32, game.world.height - 100, 'dude');
+            player.scale.x = 1.2;
+            player.scale.y = 1.2;            // var randd = game.rnd.realInRange(-1, 1);
+
+            // player.scale.setTo(randd, randd);
+
+            //  We need to enable physics on the player
+            game.physics.arcade.enable(player);
+
+            //  Player physics properties. Give the little guy a slight bounce.
+            player.body.bounce.y = 0;
+            player.body.gravity.y = 0;
+            player.body.collideWorldBounds = true;
+
+            //  Our two animations, walking left and right.
+            player.animations.add('left', [6, 7], 5, true);      //motion name, frames used, frameRate, loop the animation?
+            player.animations.add('right', [2, 3], 5, true);
+            player.animations.add('up', [0, 1], 5, true);
+            player.animations.add('down', [4, 5], 5, true);
+
+            //  Finally some stars to collect
+            stars = game.add.group();
+
+            //  We will enable physics for any star that is created in this group
+            stars.enableBody = true;
+
+            //  Here we'll create 12 of them evenly spaced apart
+            for (var i = 0; i < 12; i++) {
+                //  Create a star inside of the 'stars' group
+                var star = stars.create(i * Math.random() * 80, Math.random() * 420, 'star');      //i*70 is the x coordinate...
+
+            }
+
+            //  Pineapple collection
+            boomarangs = game.add.group();
+
+            //  We will enable physics for any pineapple that is created in this group
+            boomarangs.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (4 + Math.random() * 10), 1, createBoomarang, this);
+            function createBoomarang() {
+                var boomarang = boomarangs.create(game.world.randomX, game.world.randomY, 'boomarang')
+
+            }
+
+            koalas = game.add.group();
+
+            //  We will enable physics for any pineapple that is created in this group
+            koalas.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (7 + Math.random() * 8), 1, createKoala, this);
+            function createKoala() {
+                var koala = koalas.create(game.world.randomX, game.world.randomY, 'koala')
+            }
+
+            opals = game.add.group();
+
+            //  We will enable physics for any pineapple that is created in this group
+            opals.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (3 + Math.random() * 5), 1, createOpal, this);
+            function createOpal() {
+                var opal = opals.create(game.world.randomX, game.world.randomY, 'opal')
+            }
+
+            sapphires = game.add.group();
+
+            //  We will enable physics for any pineapple that is created in this group
+            sapphires.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (3 + Math.random() * 5), 1, createSapphire, this);
+            function createSapphire() {
+                var sapphire = sapphires.create(game.world.randomX, game.world.randomY, 'sapphire')
+            }
+
+            amethysts = game.add.group();
+
+            //  We will enable physics for any pineapple that is created in this group
+            amethysts.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (3 + Math.random() * 5), 1, createAmethyst, this);
+            function createAmethyst() {
+                var amethyst = amethysts.create(game.world.randomX, game.world.randomY, 'amethyst')
+            }
+
+
+            //  The score
+            scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+
+            //  Our controls.
+            cursors = game.input.keyboard.createCursorKeys();
+
+        }
+
+        function update() {
+
+            //  Collide the player and the sprites with the platforms
+            var hitPlatform = game.physics.arcade.collide(player, platforms);
+            game.physics.arcade.collide(stars, platforms);
+            game.physics.arcade.collide(boomarangs, platforms);
+            game.physics.arcade.collide(koalas, platforms);
+            game.physics.arcade.collide(opals, platforms);
+            game.physics.arcade.collide(sapphires, platforms);
+            game.physics.arcade.collide(amethysts, platforms);
+
+
+            //  Checks to see if the player overlaps with any of the stars, if he does call the collect function
+            game.physics.arcade.overlap(player, stars, collectStar, null, this);
+            game.physics.arcade.overlap(player, boomarangs, collectBoomarang, null, this);
+            game.physics.arcade.overlap(player, koalas, collectKoala , null, this);
+            game.physics.arcade.overlap(player, opals, collectOpal, null, this);
+            game.physics.arcade.overlap(player, sapphires, collectSapphire, null, this);
+            game.physics.arcade.overlap(player, amethysts, collectAmethyst, null, this);
+
+
+            //  Reset the players velocity (movement)
+            player.body.velocity.x = 0;
+            player.body.velocity.y = 0;
+
+            if (cursors.left.isDown)   //  Move to the left
+            {
+                player.body.velocity.x = -150;
+                player.animations.play('left');
+            }
+            if (cursors.right.isDown)   //  Move to the right
+            {
+                player.body.velocity.x = 150;
+                player.animations.play('right');
+            }
+            if (cursors.up.isDown) {
+                player.body.velocity.y = -150;
+                player.animations.play('up');
+            }
+            if (cursors.down.isDown) {
+                player.body.velocity.y = 150;
+                player.animations.play('down');
+            }
+
+        }
+
+        // Collects exclusive item count
+        var boomarangCount = 0;
+        var koalaCount = 0;
+        var opalCount = 0;
+        var sapphireCount = 0;
+        var amethystCount = 0;
+
+        function collectStar(player, star) {
+
+            // Removes the star from the screen
+            star.kill();
+            sound = game.add.audio('collect');
+            sound.play();
+            //  Add and update the score
+            score += 10;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+
+        }
+
+        function collectBoomarang(player, boomarang) {
+
+            // Removes the boomarang from the screen
+            boomarang.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            boomarangCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('boomarangScore', boomarangCount);
+        }
+
+
+        // Removes the koala from the screen
+        function collectKoala(player, koala) {
+            koala.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            koalaCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('koalaDollScore', koalaCount);
+        }
+
+
+        // Removes the opal from the screen
+        function collectOpal(player, opal) {
+            opal.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            opalCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('opalScore', opalCount);
+        }
+
+        // Removes the sapphire from the screen
+        function collectSapphire(player, sapphire) {
+            sapphire.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            sapphireCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('sapphireScore', sapphireCount);
+        }
+
+        // Removes the amethyst from the screen
+        function collectAmethyst(player, amethyst) {
+            amethyst.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            amethystCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('amethystScore', amethystCount);
+        }
+
+
+    </script>
+
+</body>
+
+</html>

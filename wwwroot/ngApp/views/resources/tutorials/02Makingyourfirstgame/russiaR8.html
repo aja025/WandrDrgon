@@ -1,0 +1,337 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+    <title>Russia</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+        <script type="text/javascript">
+            
+                    var game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'test', {
+                        preload: preload,
+                        create: create,
+                        update: update
+                    }, true);
+            
+                    function preload() {
+            
+            
+                        // game.load.image('sky', 'assets/phx.png');
+                        game.load.image('ground', 'assets/platform.png');
+                        game.load.image('star', 'assets/star2.png');
+                        game.load.image('pierogi', 'assets/pierogi.png');
+                        game.load.image('matryoshka', 'assets/matryoshkadoll.png');
+                        game.load.image('aquamarine', 'assets/aquamarine.png');
+                        game.load.image('topaz', 'assets/topaz.png');
+                        game.load.image('alexandrite', 'assets/alexandrite.png');
+                        game.load.bitmapFont('desyrel', 'assets/desyrel.png', 'assets/desyrel.xml');
+                        game.load.spritesheet('dude', 'assets/maindragonspritesheet.png', 57, 57, 8);   // frame size X,Y and # of frames            
+                        game.load.audio('collect', 'assets/CollectCoin.mp3');
+                        game.load.audio('special', 'assets/GemSound.mp3');
+                        game.load.audio('music', 'assets/RoccoW_-_Beugel.mp3');
+                    }
+            
+                    var player;
+                    var platforms;
+                    var cursors;
+            
+                    var stars;
+                    var score = 0;
+                    var scoreText;
+            
+                    var pierogis;
+                    var score = 0;
+                    var scoreText;
+            
+                    var matryoshkas;
+                    var score = 0;
+                    var scoreText;
+            
+                    var aquamarines;
+                    var score = 0;
+                    var scoreText;
+
+                    var topazs;
+                    var score = 0;
+                    var scoreText;
+
+                    var alexandrites;
+                    var score = 0;
+                    var scoreText;
+
+                    var music;
+                    var sound;
+            
+                    function create() {
+                        music = game.add.audio('music', .6);
+                        music.play();
+            
+                        // myText = game.add.bitmapText(60, 100, 'desyrel', "Welcome to Region 8!!", 58);
+                        myText = game.add.bitmapText(320, 100, 'desyrel', "GO!!!", 70);
+
+                        game.time.events.add(2000, function () {
+                            game.add.tween(myText).to({ y: 0 }, 1500, Phaser.Easing.Linear.None, true);
+                            game.add.tween(myText).to({ alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
+                        }, this);
+            
+                        //  The platforms group contains the ground and the 2 ledges we can jump on
+                        platforms = game.add.group();
+            
+                        //  We will enable physics for any object that is created in this group
+                        platforms.enableBody = true;
+            
+            
+                        // The player and its settings
+                        player = game.add.sprite(32, game.world.height - 100, 'dude');
+                        player.scale.x = 1.2;
+                        player.scale.y = 1.2;                        // var randd = game.rnd.realInRange(-1, 1);
+            
+                        // player.scale.setTo(randd, randd);
+            
+                        //  We need to enable physics on the player
+                        game.physics.arcade.enable(player);
+            
+                        //  Player physics properties. Give the little guy a slight bounce.
+                        player.body.bounce.y = 0;
+                        player.body.gravity.y = 0;
+                        player.body.collideWorldBounds = true;
+            
+                        //  Our two animations, walking left and right.
+                        player.animations.add('left', [6, 7], 5, true);      //motion name, frames used, frameRate, loop the animation?
+                        player.animations.add('right', [2, 3], 5, true);
+                        player.animations.add('up', [0, 1], 5, true);
+                        player.animations.add('down', [4, 5], 5, true);
+            
+            
+                        //  Finally some stars to collect
+                        stars = game.add.group();
+            
+                        //  We will enable physics for any star that is created in this group
+                        stars.enableBody = true;
+            
+                        //  Here we'll create 12 of them evenly spaced apart
+                        for (var i = 0; i < 12; i++) {
+                            //  Create a star inside of the 'stars' group
+                            var star = stars.create(i * Math.random() * 80, Math.random() * 420, 'star');      //i*70 is the x coordinate...
+            
+                        }
+            
+                        //  Pineapple collection
+                        pierogis = game.add.group();
+          
+                        //  We will enable physics for any pineapple that is created in this group
+                        pierogis.enableBody = true;
+            
+                        game.time.events.repeat(Phaser.Timer.SECOND * (4 + Math.random() * 10), 1, createPierogi, this);
+                        function createPierogi() {
+                            var pierogi = pierogis.create(game.world.randomX, game.world.randomY, 'pierogi')
+            
+                        }
+            
+                        matryoshkas = game.add.group();
+            
+                        //  We will enable physics for any pineapple that is created in this group
+                        matryoshkas.enableBody = true;
+            
+                        game.time.events.repeat(Phaser.Timer.SECOND * (7 + Math.random() * 8), 1, createMatryoshka, this);
+                        function createMatryoshka() {
+                            var matryoshka = matryoshkas.create(game.world.randomX, game.world.randomY, 'matryoshka')
+                        }
+            
+                        aquamarines = game.add.group();
+            
+                        //  We will enable physics for any pineapple that is created in this group
+                        aquamarines.enableBody = true;
+            
+                        game.time.events.repeat(Phaser.Timer.SECOND * (3 + Math.random() * 5), 1, createAquamarine, this);
+                        function createAquamarine() {
+                            var aquamarine = aquamarines.create(game.world.randomX, game.world.randomY, 'aquamarine')
+                        }
+
+                        topazs = game.add.group();
+            
+                        //  We will enable physics for any pineapple that is created in this group
+                        topazs.enableBody = true;
+            
+                        game.time.events.repeat(Phaser.Timer.SECOND * (3 + Math.random() * 5), 1, createTopaz, this);
+                        function createTopaz() {
+                            var topaz = topazs.create(game.world.randomX, game.world.randomY, 'topaz')
+                        }
+
+                        alexandrites = game.add.group();
+            
+                        //  We will enable physics for any pineapple that is created in this group
+                        alexandrites.enableBody = true;
+            
+                        game.time.events.repeat(Phaser.Timer.SECOND * (3 + Math.random() * 5), 1, createAlexandrite, this);
+                        function createAlexandrite() {
+                            var alexandrite = alexandrites.create(game.world.randomX, game.world.randomY, 'alexandrite')
+                        }
+            
+            
+            
+                        //  The score
+                        scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+            
+                        //  Our controls.
+                        cursors = game.input.keyboard.createCursorKeys();
+            
+                    }
+            
+                    function update() {
+            
+                        //  Collide the player and the sprites with the platforms
+                        var hitPlatform = game.physics.arcade.collide(player, platforms);
+                        game.physics.arcade.collide(stars, platforms);
+                        game.physics.arcade.collide(pierogis, platforms);
+                        game.physics.arcade.collide(matryoshkas, platforms);
+                        game.physics.arcade.collide(aquamarines, platforms);
+                        game.physics.arcade.collide(topazs, platforms);
+                        game.physics.arcade.collide(alexandrites, platforms);
+            
+            
+                        //  Checks to see if the player overlaps with any of the stars, if he does call the collect function
+                        game.physics.arcade.overlap(player, stars, collectStar, null, this);
+                        game.physics.arcade.overlap(player, pierogis, collectPierogi, null, this);
+                        game.physics.arcade.overlap(player, matryoshkas, collectMatryoshka, null, this);
+                        game.physics.arcade.overlap(player, aquamarines, collectAquamarine, null, this);
+                        game.physics.arcade.overlap(player, topazs, collectTopaz, null, this);
+                        game.physics.arcade.overlap(player, alexandrites, collectAlexandrite, null, this);
+                        
+                        //  Reset the players velocity (movement)
+                        player.body.velocity.x = 0;
+                        player.body.velocity.y = 0;
+            
+            
+                        if (cursors.left.isDown)   //  Move to the left
+                        {
+                            player.body.velocity.x = -150;
+                            player.animations.play('left');
+                        }
+                        if (cursors.right.isDown)   //  Move to the right
+                        {
+                            player.body.velocity.x = 150;
+                            player.animations.play('right');
+                        }
+                        if (cursors.up.isDown) {
+                            player.body.velocity.y = -150;
+                            player.animations.play('up');
+                        }
+                        if (cursors.down.isDown) {
+                            player.body.velocity.y = 150;
+                            player.animations.play('down');
+                        }
+            
+                    }
+            
+                    // Collects exclusive item count
+                    var pierogiCount = 0;
+                    var matryoshkaCount = 0;
+                    var aquamarineCount = 0;
+                    var topazCount = 0;
+                    var alexandriteCount = 0;
+
+                    function collectStar(player, star) {
+                        // Removes the star from the screen
+                        star.kill();
+                        sound = game.add.audio('collect');
+                        sound.play();
+            
+                        //  Add and update the score
+                        score += 10;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('gameScore', score);
+            
+                    }
+            
+                    function collectPierogi(player, pierogi) {
+                        // Removes the pierogi from the screen
+                        pierogi.kill();
+                        sound = game.add.audio('special');
+                        sound.play();
+                        //  Add and update the score
+                        score += 20;
+                        pierogiCount += 1;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('gameScore', score);
+                        window.sessionStorage.setItem('pierogiScore', pierogiCount);
+                    }
+            
+            
+                    // Removes the matroyshkaumeria from the screen
+                    function collectMatryoshka(player, matryoshka) {
+                        matryoshka.kill();
+                        sound = game.add.audio('special');
+                        sound.play();
+                        //  Add and update the score
+                        score += 20;
+                        matryoshkaCount += 1;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('gameScore', score);
+                        window.sessionStorage.setItem('matryoshkaDollScore', matryoshkaCount);
+                    }
+            
+            
+                    // Removes the aquamarine from the screen
+                    function collectAquamarine(player, aquamarine) {
+                        aquamarine.kill();
+                        sound = game.add.audio('special');
+                        sound.play();
+                        //  Add and update the score
+                        score += 20;
+                        aquamarineCount += 1;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('aquamarineScore', score);
+                        window.sessionStorage.setItem('aquamarineScore', aquamarineCount);
+                    }
+
+                    // Removes the aquamarine from the screen
+                    function collectTopaz(player, topaz) {
+                        topaz.kill();
+                        sound = game.add.audio('special');
+                        sound.play();
+                        //  Add and update the score
+                        score += 20;
+                        topazCount += 1;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('topazScore', score);
+                        window.sessionStorage.setItem('topazScore', topazCount);
+                    }
+
+                    // Removes the aquamarine from the screen
+                    function collectAquamarine(player, aquamarine) {
+                        aquamarine.kill();
+                        sound = game.add.audio('special');
+                        sound.play();
+                        //  Add and update the score
+                        score += 20;
+                        aquamarineCount += 1;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('aquamarineScore', score);
+                        window.sessionStorage.setItem('aquamarineScore', aquamarineCount);
+                    }
+
+                    // Removes the aquamarine from the screen
+                    function collectAlexandrite(player, alexandrite) {
+                        alexandrite.kill();
+                        sound = game.add.audio('special');
+                        sound.play();
+                        //  Add and update the score
+                        score += 20;
+                        alexandriteCount += 1;
+                        scoreText.text = 'Score: ' + score;
+                        window.sessionStorage.setItem('alexandriteScore', score);
+                        window.sessionStorage.setItem('alexandriteScore', alexandriteCount);
+                    }
+                </script>
+            
+            </body>
+            
+            </html>

@@ -1,0 +1,27 @@
+
+<h1>WanderFolks</h1>
+<br>
+<br>
+<div id="search">
+    <div>
+        <input ng-model="input" type="text" name="search" placeholder="Search Users">
+    </div>
+</div>
+<div id="registry" style="overflow-y:scroll; height: 60%">
+    <h3>Registry</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Profile Pic</th>
+            <th>Display Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in controller.users | filter : input" ng-if="user.profileId != 1">
+            <td><img class="TablePic" ng-src="{{ user.image }}" alt="user"></td>
+            <td> <a href="#" ng-click="controller.getUser(user.profileId)">{{ user.displayName }}</a></td>
+        
+        </tr>
+    </tbody>
+</table>
+</div>

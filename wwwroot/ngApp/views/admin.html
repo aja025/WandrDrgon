@@ -1,0 +1,43 @@
+<h1>Administration Panel</h1>
+<br>
+<br>
+<div id="search">
+    <div>
+        <input ng-model="input" type="text" name="search" placeholder="Search Users">
+    </div>
+</div>
+
+<div id="registry">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Display Name</th>
+                <th>User Name</th>
+                <th>Delete User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in controller.profiles | filter : input">
+                <td>{{user.profileId}}</td>
+                <td>
+                    <a href="#" ng-click="controller.getUser(user.profileId)">{{ user.displayName}}</a>
+                </td>
+                <td>{{user.userName}}</td>
+                <td>
+                    <a href="#" ng-click="controller.deleteProfile(user.profileId, user.userId)">DELETE</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <ul>
+        <li ng-repeat="user in controller.profiles | filter : input">
+            <b>ID:</b> {{user.profileId}} |
+            <b>Display Name:</b>
+            <a href="#" ng-click="controller.getUser(user.profileId)">{{ user.displayName}}</a> |
+            <b>User Name:</b> {{user.userName}} |
+            <a href="#" ng-click="controller.deleteProfile(user.profileId, user.userId)">DELETE</a>
+        </li>
+    </ul> -->
+</div>

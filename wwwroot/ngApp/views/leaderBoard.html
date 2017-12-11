@@ -1,0 +1,27 @@
+
+   <h1>LeaderBoard</h1>
+   <br>
+   
+   <div id="xp" style="overflow-y:scroll; ">
+        <h3><i class="fa fa-trophy" aria-hidden="true"></i> Most Experience Points</h3>
+
+        <ol>
+            <li ng-repeat="x in controller.dragons | orderBy: '-xp'" ng-if="x.name != 'Admin'"><a href="#" ng-click="controller.getUser(x.profileId)">{{x.name}}</a> : {{x.xp}}</li>
+        </ol>
+    </div>
+
+    <div id="km" style="overflow-y:scroll">
+        <h3><i class="fa fa-globe" aria-hidden="true"></i> Most Distance Travelled</h3>
+
+        <ol>
+            <li ng-repeat="x in controller.dragons | orderBy: '-kmTravelled'" ng-if="x.name != 'Admin'"><a href="#" ng-click="controller.getUser(x.profileId)">{{x.name}}</a> : {{x.kmTravelled | number: 1}}</li>
+        </ol>
+    </div>
+    <div id="trips" style="overflow-y:scroll">
+        <h3><i class="fa fa-suitcase" aria-hidden="true"></i> Most Trips Taken</h3>
+
+        <ol>
+            <li ng-repeat="x in controller.dragons | orderBy: '-tripsTaken'" ng-if="x.name != 'Admin'"><a href="#" ng-click="controller.getUser(x.profileId)">{{x.name}}</a> : {{x.tripsTaken}}</li>
+        </ol>
+    </div>
+</div>

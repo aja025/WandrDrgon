@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>South Africa</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+
+        var game = new Phaser.Game('100%', '100%', Phaser.AUTO, 'test', {
+            preload: preload,
+            create: create,
+            update: update
+        }, true);
+
+        function preload() {
+            game.load.image('ground', 'assets/platform.png');
+            game.load.image('star', 'assets/star2.png');
+            game.load.image('beadedNecklace', 'assets/beadednecklace.png');
+            game.load.image('animalMask', 'assets/animalmask.png');
+            game.load.image('amethyst', 'assets/amethyst.png');
+            game.load.image('sapphire', 'assets/sapphire.png');
+            game.load.image('tigersEye', 'assets/tigerseye.png');
+            game.load.bitmapFont('desyrel', 'assets/desyrel.png', 'assets/desyrel.xml');
+            game.load.spritesheet('dude', 'assets/maindragonspritesheet.png', 57, 57, 8);   // frame size X,Y and # of frames
+            game.load.audio('collect', 'assets/CollectCoin.mp3');
+            game.load.audio('special', 'assets/GemSound.mp3');
+            game.load.audio('music', 'assets/RoccoW_-_Ace_of_Clubs.mp3');
+        }
+
+        var player;
+        var platforms;
+        var cursors;
+
+        var stars;
+        var score = 0;
+        var scoreText;
+
+        var beadedNecklaces;
+        var score = 0;
+        var scoreText;
+
+        var animalMasks;
+        var score = 0;
+        var scoreText;
+
+        var amethysts;
+        var score = 0;
+        var scoreText;
+
+        var sapphires;
+        var score = 0;
+        var scoreText;
+
+        var tigersEyes;
+        var score = 0;
+        var scoreText;
+
+        var music;
+        var sound;
+
+        function create() {
+            music = game.add.audio('music', .6);
+            music.play();            // myText = game.add.bitmapText(60, 100, 'desyrel', "Welcome to Region 7!!", 58);
+            myText = game.add.bitmapText(320, 100, 'desyrel', "GO!!!", 70);
+
+
+            game.time.events.add(2000, function () {
+                game.add.tween(myText).to({ y: 0 }, 1500, Phaser.Easing.Linear.None, true);
+                game.add.tween(myText).to({ alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
+            }, this);
+
+            //  The platforms group contains the ground and the 2 ledges we can jump on
+            platforms = game.add.group();
+
+            //  We will enable physics for any object that is created in this group
+            platforms.enableBody = true;
+
+
+            // The player and its settings
+            player = game.add.sprite(32, game.world.height - 100, 'dude');
+            // var randd = game.rnd.realInRange(-1, 1);
+
+            // player.scale.setTo(randd, randd);
+
+            //  We need to enable physics on the player
+            game.physics.arcade.enable(player);
+
+            //  Player physics properties. Give the little guy a slight bounce.
+            player.body.bounce.y = 0;
+            player.body.gravity.y = 0;
+            player.body.collideWorldBounds = true;
+
+            //  Our two animations, walking left and right.
+            player.animations.add('left', [6, 7], 5, true);      //motion name, frames used, frameRate, loop the animation?
+            player.animations.add('right', [2, 3], 5, true);
+            player.animations.add('up', [0, 1], 5, true);
+            player.animations.add('down', [4, 5], 5, true);
+
+
+            //  Finally some stars to collect
+            stars = game.add.group();
+
+            //  We will enable physics for any star that is created in this group
+            stars.enableBody = true;
+
+            //  Here we'll create 12 of them evenly spaced apart
+            for (var i = 0; i < 12; i++) {
+                //  Create a star inside of the 'stars' group
+                var star = stars.create(i * Math.random() * 80, Math.random() * 420, 'star');      //i*70 is the x coordinate...
+
+            }
+
+            //  beadedNecklace collection
+            beadedNecklaces = game.add.group();
+
+            //  We will enable physics for any beadedNecklace that is created in this group
+            beadedNecklaces.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (7 + Math.random() * 15), 1, createBeadedNecklace, this);
+            function createBeadedNecklace() {
+                var beadedNecklace = beadedNecklaces.create(game.world.randomX, game.world.randomY, 'beadedNecklace')
+
+            }
+
+            animalMasks = game.add.group();
+
+            //  We will enable physics for any animalMasks that is created in this group
+            animalMasks.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (4 + Math.random() * 8), 1, createAnimalMask, this);
+            function createAnimalMask() {
+                var animalMask = animalMasks.create(game.world.randomX, game.world.randomY, 'animalMask')
+            }
+
+            amethysts = game.add.group();
+
+            //  We will enable physics for any amethyst that is created in this group
+            amethysts.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (5 + Math.random() * 55), 1, createAmethyst, this);
+            function createAmethyst() {
+                var amethyst = amethysts.create(game.world.randomX, game.world.randomY, 'amethyst')
+            }
+
+            sapphires = game.add.group();
+
+            //  We will enable physics for any amethyst that is created in this group
+            sapphires.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (10 + Math.random() *8), 1, createSapphire, this);
+            function createSapphire() {
+                var sapphire = sapphires.create(game.world.randomX, game.world.randomY, 'sapphire')
+            }
+
+            tigersEyes = game.add.group();
+
+            //  We will enable physics for any tigersEye that is created in this group
+            tigersEyes.enableBody = true;
+
+            game.time.events.repeat(Phaser.Timer.SECOND * (9 + Math.random() * 55), 1, createTigersEye, this);
+            function createTigersEye() {
+                var tigersEye = tigersEyes.create(game.world.randomX, game.world.randomY, 'tigersEye')
+            }
+
+
+            //  The score
+            scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#000' });
+
+            //  Our controls.
+            cursors = game.input.keyboard.createCursorKeys();
+
+        }
+
+        function update() {
+
+            //  Collide the player and the sprites with the platforms
+            var hitPlatform = game.physics.arcade.collide(player, platforms);
+            game.physics.arcade.collide(stars, platforms);
+            game.physics.arcade.collide(beadedNecklaces, platforms);
+            game.physics.arcade.collide(animalMasks, platforms);
+            game.physics.arcade.collide(amethysts, platforms);
+            game.physics.arcade.collide(sapphires, platforms);
+            game.physics.arcade.collide(tigersEyes, platforms);
+
+
+            //  Checks to see if the player overlaps with any of the stars, if he does call the collect function
+            game.physics.arcade.overlap(player, stars, collectStar, null, this);
+            game.physics.arcade.overlap(player, beadedNecklaces, collectBeadedNecklace, null, this);
+            game.physics.arcade.overlap(player, animalMasks, collectAnimalMask, null, this);
+            game.physics.arcade.overlap(player, amethysts, collectAmethyst, null, this);
+            game.physics.arcade.overlap(player, sapphires, collectSapphire, null, this);
+            game.physics.arcade.overlap(player, tigersEyes, collectTigersEye, null, this);
+
+
+            //  Reset the players velocity (movement)
+            player.body.velocity.x = 0;
+            player.body.velocity.y = 0;
+
+
+            if (cursors.left.isDown)   //  Move to the left
+            {
+                player.body.velocity.x = -150;
+                player.animations.play('left');
+            }
+            if (cursors.right.isDown)   //  Move to the right
+            {
+                player.body.velocity.x = 150;
+                player.animations.play('right');
+            }
+            if (cursors.up.isDown) {
+                player.body.velocity.y = -150;
+                player.animations.play('up');
+            }
+            if (cursors.down.isDown) {
+                player.body.velocity.y = 150;
+                player.animations.play('down');
+            }
+
+        }
+
+        // Collects exclusive item count
+        var beadedNecklaceCount = 0;
+        var animalMaskCount = 0;
+        var amethystCount = 0;
+        var sapphireCount = 0;
+        var tigersEyeCount = 0;
+
+        function collectStar(player, star) {
+
+            // Removes the star from the screen
+            star.kill();
+            sound = game.add.audio('collect');
+            sound.play();
+            //  Add and update the score
+            score += 10;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+
+        }
+
+        function collectBeadedNecklace(player, beadedNecklace) {
+
+            // Removes the beadedNecklace from the screen
+            beadedNecklace.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            beadedNecklaceCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('beadedNecklaceScore', beadedNecklaceCount);
+        }
+
+
+        // Removes the animalMask from the screen
+        function collectAnimalMask(player, animalMask) {
+            animalMask.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            animalMaskCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('animalMaskScore', animalMaskCount);
+        }
+
+
+        // Removes the plumeria from the screen
+        function collectAmethyst(player, amethyst) {
+            amethyst.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            amethystCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('amethystScore', amethystCount);
+        }
+
+        // Removes the sapphire from the screen
+        function collectSapphire(player, sapphire) {
+            sapphire.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            sapphireCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('sapphireScore', sapphireCount);
+        }
+
+        // Removes the plumeria from the screen
+        function collectTigersEye(player, tigersEye) {
+            tigersEye.kill();
+            sound = game.add.audio('special');
+            sound.play();
+            //  Add and update the score
+            score += 20;
+            tigersEyeCount += 1;
+            scoreText.text = 'Score: ' + score;
+            window.sessionStorage.setItem('gameScore', score);
+            window.sessionStorage.setItem('tigersEyeScore', tigersEyeCount);
+        }
+
+    </script>
+
+</body>
+
+</html>

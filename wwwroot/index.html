@@ -1,0 +1,131 @@
+<html ng-app="myApp">
+    
+    <head>
+        <title>WanderDragon</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- <link rel="stylesheet" href="/css/w3.css">
+        <link rel="stylesheet" href="/css/w3-theme.css"> -->
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/snake.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="/css/xeditable.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Raleway|Saira+Semi+Condensed|Inconsolata" rel="stylesheet">
+        <base href="/">
+    </head>
+    
+    <body ng-controller="AccountController as account">
+        <div>
+            <!-- <h1>WanderDragon App</h1> -->
+            <div id="navigation">
+                <span class="leftNav">
+                        <a ui-sref="home"> <img src="/images/logodragon.png" class="logo"> </a>
+                </span>
+                <span class="centerNav">
+                    WanderDragon
+                </span>
+                <span class="rightNav">
+                    <a href="/login" ng-show="!account.isLoggedIn()">Login</a>
+                    <a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a>
+                    <!-- <p>
+                        <div ng-show="account.isLoggedIn()" class="user">
+                            [{{account.getUserName()}}]
+                        </div>
+                    </p> -->
+                </span>
+            </div>
+            <div ng-show="account.isLoggedIn()" id="secretNav">
+                <a ui-sref="dashboard">Dashboard</a> <i class="fa fa-star" aria-hidden="true"></i>
+                <a ui-sref="dynamicMap">Wander</a> <i class="fa fa-star" aria-hidden="true"></i>
+                <a ui-sref="leaderboard">LeaderBoard</a> <i class="fa fa-star" aria-hidden="true"></i>
+                <a ui-sref="allUsers">WanderFolks</a> 
+            </div>
+            
+    
+            <ui-view></ui-view>
+            <div id="bottomNav">
+                    <span class="socialMedia">
+                    <a href="http://facebook.com">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                        <a href="http://twitter.com">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="mailto: admin@wanderdragon.com">
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </span>
+                        ::
+                        <span class="aboutLink">
+                        
+                        <a ui-sref="aboutUs"> About</a></span>
+                        (c) Wanderdragon.com
+                            </div>
+        </div>
+    
+        <!-- Library Files -->
+        <script src="/libs/signalr-client-1.0.0-alpha2-final.min.js"></script>    
+        <script src="/libs/angular.min.js"></script>
+        <script src="/libs/angular-resource.min.js"></script>
+        <script src="/libs/angular-animate.min.js"></script>
+        <script src="/libs/angular-touch.min.js"></script>
+        <script src="/libs/angular-ui-router.min.js"></script>
+        <!-- <script src="/libs/phaser.min.js"></script> -->
+        <script src="/libs/xeditable.js"></script>
+    
+        <!-- controllers -->
+        <script src="/ngApp/controllers/platformsController.js"></script>
+        <script src="/ngApp/controllers/accountController.js"></script>
+        <script src="/ngApp/controllers/allUsersController.js"></script>
+        <script src="/ngApp/controllers/confirmEmailController.js"></script>
+        <script src="/ngApp/controllers/dashboardController.js"></script>
+        <script src="/ngApp/controllers/dynamicMapController.js"></script>
+        <script src="/ngApp/controllers/externalRegisterController.js"></script>
+        <script src="/ngApp/controllers/homeController.js"></script>
+        <script src="/ngApp/controllers/loginController.js"></script>
+        <script src="/ngApp/controllers/otherDashboardController.js"></script>
+        <script src="/ngApp/controllers/registerController.js"></script>
+        <script src="/ngApp/controllers/secretController.js"></script>
+        <script src="/ngApp/controllers/updateProfileController.js"></script>
+        <script src="/ngApp/controllers/addDragonController.js"></script>
+        <script src="/ngApp/controllers/part10Controller.js"></script>
+        <script src="/ngApp/controllers/breakoutController.js"></script>
+        <script src="/ngApp/controllers/invadersController.js"></script>
+        <script src="/ngApp/controllers/steveController.js"></script>
+        <script src="/ngApp/controllers/skyboatController.js"></script>
+        <script src="/ngApp/controllers/leaderBoardController.js"></script>
+        <script src="/ngApp/controllers/tankController.js"></script>
+        <script src="/ngApp/controllers/randomEventController.js"></script>
+        <script src="/ngApp/controllers/adminController.js"></script>
+        <script src="/ngApp/controllers/gridController.js"></script>
+        
+       
+    
+        <!-- <script src="/ngApp/controllers/phaserController.js"></script> -->
+    
+    
+    
+        <!-- services -->
+        <script src="/ngApp/services/accountService.js"></script>
+        <script src="/ngApp/services/dragonService.js"></script>
+        <script src="/ngApp/services/profileService.js"></script>
+        <script src="/ngApp/services/staticMapService.js"></script>
+        <script src="/ngApp/services/dashboardService.js"></script>
+        <script src="/ngApp/services/eventService.js"></script>
+        
+        
+        <script src="/ngApp/app.js"></script>
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuc6843tFoduNTipfH_gw6Yp5U0sMCleQ&callback=initMap"></script> -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuc6843tFoduNTipfH_gw6Yp5U0sMCleQ&callback=angular.noop"></script>
+        <script src="https://static.filestackapi.com/v3/filestack.js"></script>
+        <!-- <div class="bottomNav">
+            <h3>
+               <a href="aboutUs">About DoStuff</a>
+            </h3>
+        </div> -->
+        
+        
+        </body>
+    
+        </html>
+        

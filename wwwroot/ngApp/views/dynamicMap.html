@@ -1,0 +1,26 @@
+<h1>Wander</h1>
+<body>
+<div id="map"></div>
+<div class="flightPath" id="form">
+<form>
+    <label>Flight Path</label>
+    <br>
+    <input ng-model="controller.end" type="text" id="destinationcoord"></input>
+    <button ng-click="controller.travelCheck(controller.end)">Let's Go!</button>
+</form>
+<form>
+    <label>Live Chat</label>
+    <div>
+        <input ng-model="controller.message" type="text" id="chatmessage" ng-keyup="controller.check($event)">
+        <button ng-click="controller.sendMessage()">Send</button>
+    </div>
+    <ul class="chatbox">
+        <li ng-repeat="msg in controller.messages track by $index">{{msg}}</li>
+    </ul>
+    <button class="tunnel" ng-click="controller.go()">Sniff For Gold</button>
+</form>
+</div>
+</body>
+
+
+

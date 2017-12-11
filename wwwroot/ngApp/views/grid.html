@@ -1,0 +1,24 @@
+<div id="gameContainer" class="grid">
+    <div>
+        <div class="row" ng-repeat="column in controller.board">
+            <div class="column" ng-style="{'background-image': 'url('+ controller.setStyling($parent.$index, $index) + ')'}" ng-repeat="row in column track by $index"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="wandertalk">
+    <div class="wander">
+        <p>WanderFolks: {{controller.users}}</p>
+
+        <p>Your Score: {{controller.score}}</p>
+    </div>
+    <div class="text">
+        <input ng-model="controller.message" type="text" id="chatinput" ng-keyup="controller.check($event)">
+        <button ng-click="controller.sendMessage()" class="btn">Send</button>
+    </div>
+    <ul class="messages">
+        <li ng-repeat="msg in controller.messages track by $index" class="words">{{msg}}</li>
+        <!-- <li ng-repeat="name in controller.names track by $index" class="words">{{name}}</li> -->
+    </ul>
+</div>

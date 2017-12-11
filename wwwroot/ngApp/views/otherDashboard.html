@@ -1,0 +1,195 @@
+<h1>
+    Dashboard</h1>
+<br>
+<br>
+<div>
+
+    <body>
+        <!-- <div>
+            <!-- <ul>
+                <li class="UserNav">
+                    <a ui-sref="dashboard">Dashboard</a>
+                </li>
+                <li class="UserNav">
+                    <a ui-sref="updateProfile">Profile</a>
+                </li>
+                <li class="UserNav">
+                    <a ui-sref="dynamicMap">Wander</a>
+                </li>
+            </ul> 
+        </div> -->
+        <div class="theUser">
+            <br>
+            <h2>User</h2>
+            <div>
+
+                <h3>{{ controller.dashboard.profile.displayName }}</h3>
+
+
+            </div>
+            <div>
+
+                <img class="UserPic" ng-src="{{controller.dashboard.profile.image}}" alt="user">
+                <br>
+
+            </div>
+
+
+            <p>
+                <h3>User Stats</h3>
+            </p>
+            <div>
+                <ul class="userStats">
+                    <li>
+                        <b>Display Name:</b> {{controller.dashboard.profile.displayName}}</li>
+                    <li>
+                        <b>Joined On:</b> {{controller.dashboard.profile.joinDate | date}}</li>
+                    <li>
+                        <b>About Me:</b>
+                        {{ controller.dashboard.profile.aboutMe }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="theDragon">
+            <div>
+                <p>
+                    <h2>{{controller.dashboard.dragon.name}}</h2>
+                </p>
+            </div>
+
+
+
+            <div class="dragonStats">
+                <img class="Dragon" ng-src="{{controller.dashboard.image}}" alt="dragon">
+                <p>
+                    <h3>Dragon Stats</h3>
+                </p>
+                <ul>
+                    <li>
+                        <b>Current XP:</b> {{controller.dashboard.dragon.xp}}</li>
+                    <li>
+                        <b>Odometer:</b> {{controller.dashboard.dragon.kmTravelled | number:1 }} KM</li>
+                    <li>
+                        <b>Birthdate:</b> {{controller.dashboard.dragon.birthdate | date}}</li>
+                    <li>
+                        <b>Home Town:</b> {{controller.dashboard.dragon.hometown}}</li>
+                    <li>
+                        <b>Trips Taken:</b> {{controller.dashboard.dragon.tripsTaken}}</li>
+                </ul>
+            </div>
+
+            <div class="travelLog">
+                <h3>Item Log</h3>
+                <ul class="itemLog">
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/alexandrite.png" alt="Alexandrite" height="25" width="25" title="Alexandrite"> x {{controller.itemLog.alexandrite}}
+                    </li>
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/amethyst.png" alt="Amethyst" height="25" width="25" title="Amethyst"> x {{controller.itemLog.amethyst}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/animalmask.png" alt="Animalmask" height="25" width="25" title="AnimalMask"> x {{controller.itemLog.animalMask}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/aquamarine.png" alt="Aquamarine" height="25" width="25" title="Aquamarine"> x {{controller.itemLog.aquamarine}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/beadednecklace.png" alt="Beadednecklace" height="25"
+                            width="25" title="BeadedNecklace"> x {{controller.itemLog.beadedNecklace}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/bloodstone.png" alt="Bloodstone" height="25" width="25" title="BloodStone"> x {{controller.itemLog.bloodstone}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/boomarang.png" alt="Boomarang" height="25" width="25" title="Boomarang"> x {{controller.itemLog.boomarang}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/cherryblossom.png" alt="Cherryblossom" height="25"
+                            width="25" title="Cherryblossom"> x {{controller.itemLog.cherryblossom}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/cholla.png" alt="Cholla" height="25" width="25" title="Cholla"> x {{controller.itemLog.cholla}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/croissant.png" alt="Croissant" height="25" width="25" title="Croissant"> x {{controller.itemLog.croissant}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/garnet.png" alt="Garnet" height="25" width="25" title="Garnet"> x {{controller.itemLog.garnet}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/hamburger.png" alt="Hamburger" height="25" width="25" title="Hamburger"> x {{controller.itemLog.hamburger}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/hockeypuck.png" alt="Hockeypuck" height="25" width="25" title="HockeyPuck"> x {{controller.itemLog.hockeyPuck}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/jade.png" alt="Jade" height="25" width="25" title="Jade"> x {{controller.itemLog.jade}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/koaladoll.png" alt="koaladoll" height="25" width="25" title="KoalaDoll"> x {{controller.itemLog.koalaDoll}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/mapleleaf.png" alt="Mapleleaf" height="25" width="25" title="MapleLeaf"> x {{controller.itemLog.mapleLeaf}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/matryoshkadoll.png" alt="Matryoshkadoll" height="25"
+                            width="25" title="MatryoshkaDoll"> x {{controller.itemLog.matryoshkaDoll}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/moonstone.png" alt="Moonstone" height="25" width="25" title="MoonStone"> x {{controller.itemLog.moonstone}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/noodlebowl.png" alt="Noodlebowl" height="25" width="25" title="NoodleBowl"> x {{controller.itemLog.noodlebowl}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/opal.png" alt="Opal" height="25" width="25" title="Opal"> x {{controller.itemLog.opal}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/parrotfeather.png" alt="Parrotfeather" height="25"
+                            width="25" title="ParrotFeather"> x {{controller.itemLog.parrotFeather}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/pearl.png" alt="Pearl" height="25" width="25" title="Pearl"> x {{controller.itemLog.pearl}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/pierogi.png" alt="Pierogi" height="25" width="25" title="Pierogi"> x {{controller.itemLog.pierogi}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/pinacolada.png" alt="Pinacolada" height="25" width="25" title="PinaColada"> x {{controller.itemLog.pinaColada}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/pineapple.png" alt="Pineapple" height="25" width="25" title="Pineapple"> x {{controller.itemLog.pineapple}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/plumeria.png" alt="Plumeria" height="25" width="25" title="Plumeria"> x {{controller.itemLog.plumeria}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/sapphire.png" alt="Sapphire" height="25" width="25" title="Sapphire"> x {{controller.itemLog.sapphire}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/teabag.png" alt="Tea Bag" height="25" width="25" title="TeaBag"> x {{controller.itemLog.teaBag}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/tigerseye.png" alt="Tigerseye" height="25" width="25" title="TigersEye"> x {{controller.itemLog.tigersEye}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/topaz.png" alt="Topaz" height="25" width="25" title="Topaz"> x {{controller.itemLog.topaz}}
+                    </li>
+                    <li>
+                        <img src="ngApp/views/resources/tutorials/02Makingyourfirstgame/assets/turquoise.png" alt="Turquoise" height="25" width="25" title="Turquoise"> x {{controller.itemLog.turquoise}}
+                    </li>
+                </ul>
+
+            </div>
+            <div class="travellist">
+                <h3 style="margin-left: 22%">Travel Log</h3>
+                <ul class="travelList" style="height:120px;width:220px;border:1px solid #888888;overflow:auto;">
+                    <li ng-repeat="log in controller.logs" ng-if="$index >= controller.myIndex" id="log">{{ log }}</li>
+                </ul>
+            </div>
+            <!-- <br><br><br><br><br> -->
+
+        </div>
+    </body>

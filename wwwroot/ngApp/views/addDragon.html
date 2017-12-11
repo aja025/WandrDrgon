@@ -1,0 +1,107 @@
+<div>
+    <h1>Create a Dragon</h1>
+</div>
+<br>
+<br>
+
+<div id="addDragonCard">
+    <form ng-submit="controller.addDragon()">
+        <table ng-init="controller.dragon.dragonSpriteId=1">
+            <h3>Choose a Dragon Partner:</h3>
+            <tr>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=1 ng-checked="true">
+                        <img class="selectDragon" src="\images\dragonA_0.png" alt="dragon1">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=2>
+                        <img class="selectDragon" src="\images\dragonB_0.png" alt="dragon2">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=3>
+                        <img class="selectDragon" src="\images\dragonC_0.png" alt="dragon3">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=7>
+                        <img class="selectDragon" src="\images\dragonG_0.png" alt="dragon7">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=9>
+                        <img class="selectDragon" src="\images\dragonI_0.png" alt="dragon8">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=11>
+                        <img class="selectDragon" src="\images\dragonK_0.png" alt="dragon9">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=6>
+                        <img class="selectDragon" src="\images\dragonF_0.png" alt="dragon6">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=5>
+                        <img class="selectDragon" src="\images\dragonE_0.png" alt="dragon5">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=4>
+                        <img class="selectDragon" src="\images\dragonD_0.png" alt="dragon4">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=8>
+                        <img class="selectDragon" src="\images\dragonH_0.png" alt="dragon10">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=10>
+                        <img class="selectDragon" src="\images\dragonJ_0.png" alt="dragon11">
+                    </label>
+                </td>
+                <td>
+                    <label class="dragonBtn">
+                        <input type="radio" ng-model="controller.dragon.dragonSpriteId" value=12>
+                        <img class="selectDragon" src="\images\dragonL_0.png" alt="dragon12">
+                    </label>
+                </td>
+            </tr>
+        </table>
+
+        <div>
+            <h3>What's your dragon's name?</h3>
+            <input required type="text" ng-model="controller.dragon.name" placeholder="Dragon Name"></input>
+        </div>
+
+        <div>
+            <h3>Where was your dragon born?</h3>
+            <input required ng-model="controller.dragon.hometown" type="text" placeholder="City, State or Country"></input>
+            <input id="latitude" ng-model="controller.dragon.latitude" type="hidden" step="any" size="6" placeholder=0.000></input>
+            <input id="longitude" ng-model="controller.dragon.longitude" type="hidden" step="any" size="6" placeholder=0.000></input>
+            <a id="selectTown" href="#" ng-click="controller.codeAddress(controller.dragon.hometown)">Select Town</a>
+        </div>
+
+        <div>
+            <h3>Then let's go!</h3>
+            <input id="makeDragon" type="submit" value="Make Dragon!"></input>
+        </div>
+    </form>
+</div>

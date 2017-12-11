@@ -1,0 +1,229 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+    <title>Phaser - Making your first game, part 9</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+
+function preload() {
+
+    game.load.image('sky', '/images/skyboatbg.png');
+    game.load.image('ground', 'assets/platform.png');
+    game.load.image('star', 'assets/star.png');
+    game.load.image('rainbow', 'assets/rainbowstar.png');
+    game.load.spritesheet('dude', 'assets/maindragonspritesheet.png', 57, 57, 8);   // frame size X,Y and # of frames
+    game.load.audio('music', 'assets/rolemusi_-_07_-_07_rolemusic_-_the_great_madeja.mp3');
+    game.load.audio('collect', 'assets/CollectCoin.mp3');
+    
+}
+
+var platforms;
+var cursors;
+var sky;
+var sprite;
+
+var stars;
+var stars2;
+var score = 0;
+var scoreText;
+var music;
+var sound;
+
+function create() {
+            music = game.add.audio('music', .2);
+            music.play();
+
+    //  We're going to be using physics, so enable the Arcade Physics system
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //  A simple background for our game
+    // game.add.sprite(0, 0, 'sky');
+    var sky = game.add.sprite(0, 0, 'sky');
+    var rand = game.rnd.realInRange(-1, 1);
+    // sky.scale.setTo(rand, rand);
+    sky.scale.x = 1.2;
+    // sky.scale.y = .4;
+
+    //  The platforms group contains the ground and the 2 ledges we can jump on
+    platforms = game.add.group();
+
+    // //  We will enable physics for any object that is created in this group
+    platforms.enableBody = true;
+
+    // // Here we create the ground.
+    var ground = platforms.create(0, game.world.height - 2, 'ground');
+
+    // //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    ground.scale.setTo(2, 2);
+
+    // //  This stops it from falling away when you jump on it
+    ground.body.immovable = true;
+
+    // The player and its settings
+    // player = game.add.sprite(32, game.world.height - 150, 'dude');
+    sprite = game.add.sprite(300, 300, 'dude');       // X, Y location...
+    sprite.frame = 2;
+    // sky.scale.setTo(rand, rand);
+    sprite.scale.x = 2;
+    sprite.scale.y = 2;
+
+    sprite.anchor.set(0.5);
+
+    //  and its physics settings
+    game.physics.enable(sprite, Phaser.Physics.ARCADE);
+
+    sprite.body.drag.set(100);
+    sprite.body.maxVelocity.set(200);
+
+    //  Finally some stars to collect
+    stars = game.add.group();
+    stars2 = game.add.group();
+
+    //  We will enable physics for any star that is created in this group
+    stars.enableBody = true;
+    stars2.enableBody = true;
+
+    // Basic Repeat Event = XX stars...1 every XX seconds
+    game.time.events.repeat(Phaser.Timer.SECOND * 4, 20, createStar, this);
+    function createStar() {
+    var star = stars.create(game.world.randomX, 0, 'rainbow');
+
+    game.physics.enable(star, Phaser.Physics.ARCADE);
+    star.body.gravity.y = 90;
+    star.body.bounce.y = 0.9;
+    star.body.collideWorldBounds = true;
+    }
+    game.time.events.repeat(Phaser.Timer.SECOND * 2, 40, createStar2, this);
+    function createStar2() {
+    var star2 = stars2.create(game.world.randomX, 0, 'star');
+
+    game.physics.enable(star2, Phaser.Physics.ARCADE);
+    star2.body.gravity.y = 90;
+    // star2.body.bounce.y = 0;
+    // star2.body.collideWorldBounds = true;
+    }
+
+
+    //  Here we'll create 12 of them evenly spaced apart
+// test: for (var j = 0; j < 12; j++)************
+        for (var i = 0; i < 12; i++)
+        {
+            //  Create a star inside of the 'stars' group
+            star = stars.create(i * 70, 0, 'star');
+
+            //  Let gravity do its thing
+            star.body.gravity.y = 50;
+
+            //  This just gives each star a slightly random bounce value
+            // star.body.bounce.y = 0.7 + Math.random() * 0.2;
+        }
+
+    for (var i = 0; i < 15; i++)
+    {
+        var star = stars.create(i * 60, -800, 'star');
+
+        star.body.gravity.y = 10;
+    }
+    //  The score
+    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    //  Our controls.
+    cursors = game.input.keyboard.createCursorKeys();
+}
+
+function update() {
+    if (cursors.up.isDown)
+    {
+        game.physics.arcade.accelerationFromRotation(sprite.rotation, 200, sprite.body.acceleration);
+    }
+    else
+    {
+        sprite.body.acceleration.set(0);
+    }
+
+    if (cursors.left.isDown)
+    {
+        sprite.body.angularVelocity = -300;
+    }
+    else if (cursors.right.isDown)
+    {
+        sprite.body.angularVelocity = 300;
+    }
+    else
+    {
+        sprite.body.angularVelocity = 0;
+    }
+    //////  Collide the player and the stars with the platforms
+    // var hitPlatform = game.physics.arcade.collide(player, platforms);
+    // game.physics.arcade.collide(stars, platforms);
+
+    // //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+    game.physics.arcade.overlap(sprite, stars, collectStar, null, this);
+    game.physics.arcade.overlap(sprite, stars2, collectStar2, null, this);
+
+   
+    screenWrap(sprite);
+}
+
+    function screenWrap (sprite) {
+
+    if (sprite.x < 0)
+    {
+        sprite.x = game.width;
+    }
+    else if (sprite.x > game.width)
+    {
+        sprite.x = 0;
+    }
+
+    if (sprite.y < 0)
+    {
+        sprite.y = game.height;
+    }
+    else if (sprite.y > game.height)
+    {
+        sprite.y = 0;
+    }
+
+}
+
+function collectStar (sprite, star) {
+    
+    // Removes the star from the screen
+    star.kill();
+    sound = game.add.audio('collect');
+    sound.play();
+
+    //  Add and update the score
+    score += 10;
+    scoreText.text = 'Score: ' + score;
+
+}
+function collectStar2 (sprite, star2) {
+    
+    // Removes the star from the screen
+    star2.kill();
+
+    //  Add and update the score
+    score += 10;
+    scoreText.text = 'Score: ' + score;
+    window.sessionStorage.setItem('gameScore', score);
+
+}
+function render() {
+}
+
+</script>
+
+</body>
+</html>

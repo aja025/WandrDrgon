@@ -1,0 +1,21 @@
+
+<h1>Register</h1>
+<br>
+<br>
+    <ul>
+        <li ng-repeat="message in controller.validationMessages">
+            {{message}}
+        </li>
+    </ul>
+
+    <form ng-submit="controller.register()">
+        <div id="loginCard">
+            <h3>Complete Registration</h3>
+            <p>
+                You're almost there! Type in your e-mail below to continue.
+            </p>
+            <input ng-model="controller.registerUser.email" placeholder="E-mail"/>
+        
+        <input type="submit" value="Register" />
+    </div>
+    </form>

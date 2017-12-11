@@ -1,0 +1,35 @@
+<h1>Register</h1>
+<br>
+<br>
+<div id="loginCard">
+    <ul>
+        <li ng-repeat="error in controller.validationMessages">
+            {{error}}
+        </li>
+    </ul>
+
+    <form ng-submit="controller.register()">
+        <h3>Local</h3>
+        <div>
+            <input ng-model="controller.registerUser.email" placeholder="E-mail" />
+        </div>
+        <div>
+            <input ng-model="controller.registerUser.password" type="password" name="password" placeholder="Password" />
+        </div>
+        <div>
+            <input ng-model="controller.registerUser.confirmPassword" type="password" name="password" placeholder=" Confirm Password"
+            />
+        </div>
+        <input type="submit" value="Register" />
+    </form>
+
+    <h3>Social Media</h3>
+    <ul>
+        <li ng-repeat="externalLogin in account.externalLogins">
+            <button class="fb logofb" style="color:white">
+                <a target="_self" href="/api/account/ExternalLogin?provider={{externalLogin.authenticationScheme}}&returnUrl=/" style="color:white">{{externalLogin.displayName}}</a>
+            </button>
+        </li>
+    </ul>
+
+</div>

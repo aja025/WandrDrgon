@@ -1,0 +1,33 @@
+<!doctype html> 
+<html lang="en"> 
+  <head> 
+      <meta charset="UTF-8" />
+      <meta http-equiv="refresh" content="20; url=/travelStart">
+      <title>SOUTH AFRICA</title>
+      <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>      
+      <style type="text/css">
+          body {
+              margin: 0;
+          }
+      </style>
+  </head>
+  <body>
+    <!-- <h2>Special items = Beaded Necklace, Animal Mask, AMETHYST, SAPPHIRE, TIGER'S EYE </h2> -->
+    <!-- <h1>WanderDragon</h1>     -->
+    <p>
+        {{controller.message}}
+    </p>
+    <div class="timer">
+        Time: {{controller.counter}}
+    </div>
+
+<div id="container">
+    <div id="map2">   <!-- this is where angular would pass in the map coordinates /url to be displayed on the base layer? -->
+        <img ng-src="https://maps.googleapis.com/maps/api/staticmap?center={{ controller.coord }}&zoom=10&size=375x300&scale=2&maptype=satellite&key=AIzaSyDZa8fwQTXc88ZHr9JoI_DYJAoOj9Mve6U">
+    </div>
+    <div id="test"><iframe onload="contentWindow.focus()" src="ngApp/views/resources/tutorials/02Makingyourfirstgame/southAfricaR7.html" height="600" width="750">game not available</iframe>
+    </div>
+</div>   <!--angular would also save and pass back XP earned...and eventually "items" -->
+
+</body>
+</html>
